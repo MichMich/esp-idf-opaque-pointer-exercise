@@ -1,4 +1,3 @@
-// type definition for a scheduled logger component
 #ifndef SCHEDULED_LOGGER_H
 #define SCHEDULED_LOGGER_H
 #include "esp_err.h"
@@ -14,4 +13,4 @@ esp_err_t scheduled_logger_start(scheduled_logger_handle_t logger);
 void scheduled_logger_stop(scheduled_logger_handle_t logger);
 void scheduled_logger_destroy(scheduled_logger_handle_t logger);
 
-#endif // SCHEDULED_LOGGER_H
+#endif

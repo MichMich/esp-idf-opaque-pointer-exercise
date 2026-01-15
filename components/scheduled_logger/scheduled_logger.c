@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include "esp_log.h"
 
+static void scheduled_logger_task(void *param) ;
+
 static const char* TAG  = "scheduled_logger";
 static int logger_index = 0;
 
@@ -15,14 +17,6 @@ struct scheduled_logger_t {
     int interval_ms;
     TaskHandle_t task_handle; 
 };
-
-static void scheduled_logger_task(void *param) {
-    scheduled_logger_handle_t logger = (scheduled_logger_handle_t)param;
-    while (true) {
-        ESP_LOGI(TAG, "Logger %d: %s", logger->index, logger->message);
-        vTaskDelay(logger->interval_ms / portTICK_PERIOD_MS);
-    }
-}
 
 scheduled_logger_handle_t scheduled_logger_create(const char *message, int interval_ms) {
     scheduled_logger_handle_t logger = malloc(sizeof(struct scheduled_logger_t));
@@ -60,3 +54,13 @@ void scheduled_logger_destroy(scheduled_logger_handle_t logger) {
     free(logger);
 }
 
+
+// Private functions:
+
+static void scheduled_logger_task(void *param) {
+    scheduled_logger_handle_t logger = (scheduled_logger_handle_t)param;
+    while (true) {
+        ESP_LOGI(TAG, "Logger %d: %s", logger->index, logger->message);
+        vTaskDelay(logger->interval_ms / portTICK_PERIOD_MS);
+    }
+}
