@@ -1,5 +1,4 @@
-#ifndef SCHEDULED_LOGGER_H
-#define SCHEDULED_LOGGER_H
+#pragma once
 #include "esp_err.h"
 
 typedef struct scheduled_logger_t *scheduled_logger_handle_t;
@@ -12,5 +11,3 @@ void scheduled_logger_set_interval(scheduled_logger_handle_t logger, int interva
 esp_err_t scheduled_logger_start(scheduled_logger_handle_t logger);
 void scheduled_logger_stop(scheduled_logger_handle_t logger);
 void scheduled_logger_destroy(scheduled_logger_handle_t logger);
-
-#endif
